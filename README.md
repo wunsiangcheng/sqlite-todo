@@ -5,6 +5,8 @@ A tiny, dependency-free command-line To-Do application using SQLite.
 Files
 - `app.py` — CLI entrypoint. Parses arguments and calls the database layer.
 - `todo_db.py` — Minimal SQLite-backed data access layer. Provides add, list, complete, and delete operations.
+- `test_app.py` — Unit tests for the CLI application.
+- `test_todo_db.py` — Unit tests for the database layer.
 
 Quick summary
 
@@ -84,10 +86,23 @@ Troubleshooting
 - If you see SQLite busy/locked errors, try using a different path for the DB or ensure no other long-running transactions are holding the DB.
 - If `created_at` looks empty in listing, ensure your SQLite build supports the `datetime('now')` default (standard SQLite does).
 
+Testing
+
+Run all unit tests:
+
+```powershell
+python -m unittest discover -s . -p "test_*.py" -v
+```
+
+The project includes comprehensive unit tests with 100% pass rate:
+- 24 tests for the database layer
+- 33 tests for the CLI application
+- See `TEST_SUMMARY.md` for detailed test coverage information
+
 Next steps (suggestions)
-- Add unit tests for `todo_db.py` (sqlite in-memory tests are straightforward).
 - Add a simple shell completion file or a help alias for common commands.
 - Add packaging (console_scripts entry point) if you want `todo` to be globally installed.
+- Add integration tests for concurrent access scenarios.
 
 License
 
